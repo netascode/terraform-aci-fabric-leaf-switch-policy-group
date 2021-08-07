@@ -14,35 +14,55 @@ terraform {
 module "main" {
   source = "../.."
 
-  name        = "ABC"
-  alias       = "ALIAS"
-  description = "DESCR"
+  name                = "LEAFS"
+  psu_policy          = "PSU1"
+  node_control_policy = "NC1"
 }
 
-data "aci_rest" "fvTenant" {
-  dn = "uni/tn-ABC"
+data "aci_rest" "fabricLeNodePGrp" {
+  dn = "uni/fabric/funcprof/lenodepgrp-${module.main.name}"
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "fvTenant" {
-  component = "fvTenant"
+resource "test_assertions" "fabricLeNodePGrp" {
+  component = "fabricLeNodePGrp"
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.fvTenant.content.name
-    want        = "ABC"
+    got         = data.aci_rest.fabricLeNodePGrp.content.name
+    want        = module.main.name
   }
+}
 
-  equal "nameAlias" {
-    description = "nameAlias"
-    got         = data.aci_rest.fvTenant.content.nameAlias
-    want        = "ALIAS"
+data "aci_rest" "fabricRsPsuInstPol" {
+  dn = "${data.aci_rest.fabricLeNodePGrp.id}/rspsuInstPol"
+
+  depends_on = [module.main]
+}
+
+resource "test_assertions" "fabricRsPsuInstPol" {
+  component = "fabricRsPsuInstPol"
+
+  equal "tnPsuInstPolName" {
+    description = "tnPsuInstPolName"
+    got         = data.aci_rest.fabricRsPsuInstPol.content.tnPsuInstPolName
+    want        = "PSU1"
   }
+}
 
-  equal "descr" {
-    description = "descr"
-    got         = data.aci_rest.fvTenant.content.descr
-    want        = "DESCR"
+data "aci_rest" "fabricRsNodeCtrl" {
+  dn = "${data.aci_rest.fabricLeNodePGrp.id}/rsnodeCtrl"
+
+  depends_on = [module.main]
+}
+
+resource "test_assertions" "fabricRsNodeCtrl" {
+  component = "fabricRsNodeCtrl"
+
+  equal "tnFabricNodeControlName" {
+    description = "tnFabricNodeControlName"
+    got         = data.aci_rest.fabricRsNodeCtrl.content.tnFabricNodeControlName
+    want        = "NC1"
   }
 }

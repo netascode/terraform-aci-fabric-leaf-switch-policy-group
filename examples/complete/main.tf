@@ -1,7 +1,7 @@
-module "aci_scaffolding" {
-  source = "netascode/scaffolding/aci"
+module "aci_fabric_leaf_switch_policy_group" {
+  source = "netascode/fabric-leaf-switch-policy-group/aci"
 
-  name        = "ABC"
-  alias       = "ABC-ALIAS"
-  description = "My Description"
+  name                = "LEAFS"
+  psu_policy          = "PSU1"
+  node_control_policy = "NC1"
 }
