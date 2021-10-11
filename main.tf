@@ -7,7 +7,7 @@ resource "aci_rest" "fabricLeNodePGrp" {
 }
 
 resource "aci_rest" "fabricRsPsuInstPol" {
-  dn         = "${aci_rest.fabricLeNodePGrp.id}/rspsuInstPol"
+  dn         = "${aci_rest.fabricLeNodePGrp.dn}/rspsuInstPol"
   class_name = "fabricRsPsuInstPol"
   content = {
     tnPsuInstPolName = var.psu_policy
@@ -15,7 +15,7 @@ resource "aci_rest" "fabricRsPsuInstPol" {
 }
 
 resource "aci_rest" "fabricRsNodeCtrl" {
-  dn         = "${aci_rest.fabricLeNodePGrp.id}/rsnodeCtrl"
+  dn         = "${aci_rest.fabricLeNodePGrp.dn}/rsnodeCtrl"
   class_name = "fabricRsNodeCtrl"
   content = {
     tnFabricNodeControlName = var.node_control_policy
