@@ -1,6 +1,6 @@
 module "aci_fabric_leaf_switch_policy_group" {
   source  = "netascode/fabric-leaf-switch-policy-group/aci"
-  version = ">= 0.0.1"
+  version = ">= 0.1.0"
 
   name                = "LEAFS"
   psu_policy          = "PSU1"

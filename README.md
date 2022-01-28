@@ -13,13 +13,12 @@ Location in GUI:
 ```hcl
 module "aci_fabric_leaf_switch_policy_group" {
   source  = "netascode/fabric-leaf-switch-policy-group/aci"
-  version = ">= 0.0.1"
+  version = ">= 0.1.0"
 
   name                = "LEAFS"
   psu_policy          = "PSU1"
   node_control_policy = "NC1"
 }
-
 ```
 
 ## Requirements
@@ -27,13 +26,13 @@ module "aci_fabric_leaf_switch_policy_group" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_aci"></a> [aci](#requirement\_aci) | >= 0.2.0 |
+| <a name="requirement_aci"></a> [aci](#requirement\_aci) | >= 2.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aci"></a> [aci](#provider\_aci) | >= 0.2.0 |
+| <a name="provider_aci"></a> [aci](#provider\_aci) | >= 2.0.0 |
 
 ## Inputs
 
@@ -54,7 +53,7 @@ module "aci_fabric_leaf_switch_policy_group" {
 
 | Name | Type |
 |------|------|
-| [aci_rest.fabricLeNodePGrp](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
-| [aci_rest.fabricRsNodeCtrl](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
-| [aci_rest.fabricRsPsuInstPol](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
+| [aci_rest_managed.fabricLeNodePGrp](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest_managed) | resource |
+| [aci_rest_managed.fabricRsNodeCtrl](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest_managed) | resource |
+| [aci_rest_managed.fabricRsPsuInstPol](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest_managed) | resource |
 <!-- END_TF_DOCS -->
